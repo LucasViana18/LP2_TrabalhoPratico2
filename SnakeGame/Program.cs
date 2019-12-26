@@ -10,7 +10,7 @@ namespace SnakeGame
 
             render.GameBorder();
             render.Snek();
-
+            render.Apple();
         }
     }
 }
