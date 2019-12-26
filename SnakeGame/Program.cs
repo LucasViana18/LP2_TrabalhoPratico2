@@ -7,10 +7,9 @@ namespace SnakeGame
         static void Main(string[] args)
         {
             Render render = new Render();
+            MainControl mc = new MainControl();
 
-            render.GameBorder();
-            render.Snek();
-            render.Apple();
+            mc.GameLoop();
         }
     }
 }
