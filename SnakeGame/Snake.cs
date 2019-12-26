@@ -21,13 +21,19 @@ namespace SnakeGame
                     yMove--;
                     break;
                 case ConsoleKey.DownArrow:
-
+                    Console.SetCursorPosition(xMove, yMove);
+                    Console.Write(" ");
+                    yMove++;
                     break;
                 case ConsoleKey.LeftArrow:
-
+                    Console.SetCursorPosition(xMove, yMove);
+                    Console.Write(" ");
+                    xMove--;
                     break;
                 case ConsoleKey.RightArrow:
-
+                    Console.SetCursorPosition(xMove, yMove);
+                    Console.Write(" ");
+                    xMove++;
                     break;
             }
         }

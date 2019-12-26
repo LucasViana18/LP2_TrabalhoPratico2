@@ -6,9 +6,11 @@ namespace SnakeGame
     {
         static void Main(string[] args)
         {
-            Borders borders = new Borders();
+            Render render = new Render();
 
-            borders.GameBorder();
+            render.GameBorder();
+            render.Snek();
+
         }
     }
 }
