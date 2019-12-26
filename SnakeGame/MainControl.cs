@@ -4,9 +4,11 @@ namespace SnakeGame
 {
     public class MainControl
     {
+        private Render render = new Render();
+        private Snake snake = new Snake();
+
         private const double MS_PER_UPDATE = 5;
 
-        private Snake snake;
 
         public void GameLoop()
         {
@@ -20,7 +22,7 @@ namespace SnakeGame
                 previous = current;
                 lag += elapsed;
 
-               //Input();
+                snake.Input();
 
                 while (lag >= MS_PER_UPDATE)
                 {
@@ -28,8 +30,15 @@ namespace SnakeGame
                     lag -= MS_PER_UPDATE;
                 }
 
-                //Render();
+                render.Apple();
+                render.Snek();
+                render.GameBorder();
+
             }
+        }
+        private void Update()
+        {
+
         }
     }
 }
