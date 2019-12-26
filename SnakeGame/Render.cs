@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SnakeGame
 {
@@ -10,7 +8,7 @@ namespace SnakeGame
         public void GameBorder()
         {
 
-        //Borders
+            //Borders
 
             // Left vertical border
             for (int i = 1; i < 41; i++)
@@ -46,16 +44,25 @@ namespace SnakeGame
         }
 
         //Snake
-        public void Snek()
+        //public void StartSnek()
+        //{
+        //    Random rnd = new Random();
+        //    int positionx = rnd.Next(2,60);
+        //    int positiony = rnd.Next(2, 40);
+
+        //    Console.ForegroundColor = ConsoleColor.Yellow;
+        //    Console.SetCursorPosition(positionx, positiony);
+        //    Console.WriteLine("c:");
+        //}
+
+        public void DrawSnek(int xPosIn, int yPosIn)
         {
-            Random rnd = new Random();
-            int positionx = rnd.Next(2,60);
-            int positiony = rnd.Next(2, 40);
-
+            Console.SetCursorPosition(xPosIn, yPosIn);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(positionx, positiony);
-            Console.WriteLine("c:");
+            Console.WriteLine("$");
 
+            //xPosOut = xPosIn;
+            //yPosOut = yPosIn;
         }
 
         public void Apple()

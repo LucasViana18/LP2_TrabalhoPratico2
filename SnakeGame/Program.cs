@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace SnakeGame
+﻿namespace SnakeGame
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Render render = new Render();
             MainControl mc = new MainControl();
 
             mc.GameLoop();
