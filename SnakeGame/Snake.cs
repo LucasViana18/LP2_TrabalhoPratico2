@@ -1,41 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SnakeGame
 {
     public class Snake
     {
-        private int xMove;
-        private int yMove;
-
-        public void Input()
+        public void InputMove(ConsoleKey input, int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
         {
-            ConsoleKey input = Console.ReadKey().Key;
-
             switch (input)
             {
                 case ConsoleKey.UpArrow:
-                    Console.SetCursorPosition(xMove, yMove);
+                    Console.SetCursorPosition(xPosIn, yPosIn);
                     Console.Write(" ");
-                    yMove--;
+                    yPosIn--;
                     break;
                 case ConsoleKey.DownArrow:
-                    Console.SetCursorPosition(xMove, yMove);
+                    Console.SetCursorPosition(xPosIn, yPosIn);
                     Console.Write(" ");
-                    yMove++;
+                    yPosIn++;
                     break;
                 case ConsoleKey.LeftArrow:
-                    Console.SetCursorPosition(xMove, yMove);
+                    Console.SetCursorPosition(xPosIn, yPosIn);
                     Console.Write(" ");
-                    xMove--;
+                    xPosIn--;
                     break;
                 case ConsoleKey.RightArrow:
-                    Console.SetCursorPosition(xMove, yMove);
+                    Console.SetCursorPosition(xPosIn, yPosIn);
                     Console.Write(" ");
-                    xMove++;
+                    xPosIn++;
                     break;
             }
+
+            xPosOut = xPosIn;
+            yPosOut = yPosIn;
+        }
+
+        public bool CollideWithWall(int xPos, int yPos)
+        {
+            if (xPos == 1 || xPos == 61 || yPos == 1 || yPos == 41) return true;
+            return false;
         }
     }
 }
