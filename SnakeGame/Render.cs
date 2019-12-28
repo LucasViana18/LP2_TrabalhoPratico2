@@ -15,7 +15,7 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(1, i);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Right vertical border
@@ -23,7 +23,7 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(61, i);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Top horizontal border
@@ -31,7 +31,7 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(i, 1);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Bottom horizontal border
@@ -39,7 +39,7 @@ namespace SnakeGame
             {
                 
                 Console.SetCursorPosition(i, 41);
-                Console.Write("&");
+                Console.Write("#");
             }
         }
 
@@ -59,7 +59,7 @@ namespace SnakeGame
         {
             Console.SetCursorPosition(xPosIn, yPosIn);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("$");
+            Console.WriteLine("#");
 
             //xPosOut = xPosIn;
             //yPosOut = yPosIn;
@@ -73,7 +73,7 @@ namespace SnakeGame
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(positionx, positiony);
-            Console.WriteLine("Apple");
+            Console.WriteLine("0");
         }
     }
 }
