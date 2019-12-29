@@ -15,7 +15,7 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(1, i);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Right vertical border
@@ -23,7 +23,7 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(61, i);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Top horizontal border
@@ -31,15 +31,15 @@ namespace SnakeGame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(i, 1);
-                Console.Write("&");
+                Console.Write("#");
             }
 
             // Bottom horizontal border
             for (int i = 1; i < 62; i++)
             {
-                
+
                 Console.SetCursorPosition(i, 41);
-                Console.Write("&");
+                Console.Write("#");
             }
         }
 
@@ -55,25 +55,37 @@ namespace SnakeGame
         //    Console.WriteLine("c:");
         //}
 
-        public void DrawSnek(int xPosIn, int yPosIn)
+        public void RenderSnake(int applesEaten, int[] xPosIn, int[] yPosIn,
+            out int[] xPosOut, out int[] yPosOut)
         {
-            Console.SetCursorPosition(xPosIn, yPosIn);
+
+            //Render Head
+            Console.SetCursorPosition(xPosIn[0], yPosIn[0]);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("$");
+            Console.WriteLine("O");
 
-            //xPosOut = xPosIn;
-            //yPosOut = yPosIn;
-        }
+            //Render Body
+            for (int i = 1; i < applesEaten + 1; i++)
+            {
+                Console.SetCursorPosition(xPosIn[i], yPosIn[i]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("o");
+            }
 
-        public void Apple()
-        {
-            Random rnd = new Random();
-            int positionx = rnd.Next(2, 60);
-            int positiony = rnd.Next(2, 40);
+            //Erase snake last part
+            Console.SetCursorPosition(xPosIn[applesEaten + 1], yPosIn[applesEaten + 1]);
+            Console.WriteLine(" ");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(positionx, positiony);
-            Console.WriteLine("Apple");
+            //Record position of each body part
+            for (int i = applesEaten + 1; i > 0; i--)
+            {
+                xPosIn[i] = xPosIn[i - 1];
+                yPosIn[i] = yPosIn[i - 1];
+            }
+
+            //Return new arrey
+            xPosOut = xPosIn;
+            yPosOut = yPosIn;
         }
     }
 }
