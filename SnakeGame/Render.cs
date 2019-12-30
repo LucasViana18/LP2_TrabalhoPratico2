@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace SnakeGame
 {
@@ -87,6 +88,41 @@ namespace SnakeGame
             xPosOut = xPosIn;
             yPosOut = yPosIn;
         }
+
+        public void MainMenu()
+        {
+            Console.WriteLine("1. New Game    \n" +
+                              "2. High Scores \n" +
+                              "4. Quit        \n");
+        }
+
+        public void HighScores()
+        {
+            // Sets fileName And Separator So The File Can Be Read
+            string fileName = "HighScores.txt";
+            char separator = '\t';
+
+            // Opens File As A StreamReader
+            StreamReader sr = new StreamReader(fileName);
+            string s;
+
+            Console.WriteLine("HighScores\n");
+
+            // loops Through Each Line Of The File And Displays The Scores
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] nameAndScore = s.Split(separator);
+                string name = nameAndScore[0];
+                float score = Convert.ToSingle(nameAndScore[1]);
+                Console.WriteLine($"Player: {name}\tScore: {score,4}");
+            }
+
+            Console.WriteLine("\n\nPress any key to return");
+
+            // Closes the File So It can Be Used In Other Methods
+            sr.Close();
+        }
     }
+}
 }
 

@@ -39,6 +39,33 @@ namespace SnakeGame
             isAppleEaten = false;
         }
 
+        private void MainMenuControl()
+        {
+            do
+            {
+                render.MainMenu();
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        GameLoop();
+                        break;
+
+                    case "2":
+                    //highScore
+
+                    case "3":
+                        Environment.Exit(0);
+                        break;
+                            
+                }
+                //if (option == "1")
+                    //GameLoop();
+
+            } while ();
+        }
+
         // The Game loop method
         public void GameLoop()
         {
