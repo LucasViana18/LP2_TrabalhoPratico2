@@ -6,7 +6,7 @@
         {
             MainControl mc = new MainControl();
 
-            mc.GameLoop();
+            mc.MainMenuControl();
         }
     }
 }

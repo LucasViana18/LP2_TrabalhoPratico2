@@ -98,17 +98,15 @@ namespace SnakeGame
 
         public void HighScores()
         {
-            // Sets fileName And Separator So The File Can Be Read
+
             string fileName = "HighScores.txt";
             char separator = '\t';
 
-            // Opens File As A StreamReader
             StreamReader sr = new StreamReader(fileName);
             string s;
 
             Console.WriteLine("HighScores\n");
 
-            // loops Through Each Line Of The File And Displays The Scores
             while ((s = sr.ReadLine()) != null)
             {
                 string[] nameAndScore = s.Split(separator);
@@ -119,7 +117,6 @@ namespace SnakeGame
 
             Console.WriteLine("\n\nPress any key to return");
 
-            // Closes the File So It can Be Used In Other Methods
             sr.Close();
         }
     }

@@ -11,6 +11,7 @@ namespace SnakeGame
         private int[] xMove;
         private int[] yMove;
         private float speed;
+        public int Score { get { return applesEaten * 10; } }
 
         //Apple variables
         private int xApplePos;
@@ -39,7 +40,7 @@ namespace SnakeGame
             isAppleEaten = false;
         }
 
-        private void MainMenuControl()
+        public void MainMenuControl()
         {
             do
             {
@@ -53,17 +54,15 @@ namespace SnakeGame
                         break;
 
                     case "2":
-                    //highScore
+                        render.HighScores();
+                        break;
 
                     case "3":
                         Environment.Exit(0);
-                        break;
-                            
+                        break;     
                 }
-                //if (option == "1")
-                    //GameLoop();
 
-            } while ();
+            } while (true);
         }
 
         // The Game loop method
@@ -118,6 +117,7 @@ namespace SnakeGame
                 Thread.Sleep(Convert.ToInt32(speed));
 
             } while (!gameEnded);
+
         }
 
         private void SetApplePosition(Random rand, out int x, out int y)
