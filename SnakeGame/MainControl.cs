@@ -8,9 +8,11 @@ namespace SnakeGame
         // Instance variables
         private Render render;
         private Snake snake;
+        private HighScoreControl hsc;
         private int[] xMove;
         private int[] yMove;
         private float speed;
+        public int Score { get { return applesEaten * 10; } }
 
         //Apple variables
         private int xApplePos;
@@ -27,7 +29,7 @@ namespace SnakeGame
             render = new Render();
             snake = new Snake();
             random = new Random();
-
+            hsc = new HighScoreControl();
             speed = 250;
             xMove = new int[50];
             yMove = new int[50];
@@ -37,6 +39,35 @@ namespace SnakeGame
             yApplePos = 10;
             applesEaten = 0;
             isAppleEaten = false;
+        }
+
+        public void MainMenuControl()
+        {
+            bool programEnded = false;
+
+            hsc.CreateHighScores();
+            
+            do
+            {
+                render.MainMenu();
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        GameLoop();
+                        break;
+
+                    case "2":
+                        render.HighScores();
+                        break;
+
+                    case "3":
+                        programEnded = true;
+                        break;     
+                }
+
+            } while (! programEnded);
         }
 
         // The Game loop method
@@ -91,6 +122,8 @@ namespace SnakeGame
                 Thread.Sleep(Convert.ToInt32(speed));
 
             } while (!gameEnded);
+            
+            hsc.HighScoreController(this);
         }
 
         private void SetApplePosition(Random rand, out int x, out int y)

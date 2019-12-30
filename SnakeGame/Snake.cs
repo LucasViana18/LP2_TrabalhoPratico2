@@ -4,6 +4,7 @@ namespace SnakeGame
 {
     public class Snake
     {
+
         public void InputMove(ConsoleKey input, int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
         {
             switch (input)
