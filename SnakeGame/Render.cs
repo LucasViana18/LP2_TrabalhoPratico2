@@ -8,6 +8,7 @@ namespace SnakeGame
         // Visual construction of the game borders
         public void GameBorder()
         {
+            Console.Clear();
 
             //Borders
 
@@ -120,6 +121,5 @@ namespace SnakeGame
             sr.Close();
         }
     }
-}
 }
 

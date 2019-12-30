@@ -1,4 +1,6 @@
-﻿namespace SnakeGame
+﻿using System;
+
+namespace SnakeGame
 {
     class Program
     {
@@ -7,6 +9,7 @@
             MainControl mc = new MainControl();
 
             mc.MainMenuControl();
+            Environment.Exit(0);
         }
     }
 }

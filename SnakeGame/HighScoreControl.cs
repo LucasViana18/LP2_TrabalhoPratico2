@@ -7,7 +7,7 @@ namespace SnakeGame
 {
     class HighScoreControl
     {
-        MainControl mc = new MainControl();
+        //MainControl mc;
         string fileName;
         char separator;
         List<HighScore> scoreList;
@@ -44,7 +44,7 @@ namespace SnakeGame
             sr.Close();
         }
 
-        public void AddScore()
+        public void AddScore(MainControl mc)
         {
             string name;
 
@@ -86,7 +86,6 @@ namespace SnakeGame
 
                     scoreList.Add(new HighScore(name, mc.Score));
 
-                    SortHighScores();
                 }
             }
         }
@@ -114,9 +113,9 @@ namespace SnakeGame
             sw.Close();
         }
 
-        public void HighScoreController()
+        public void HighScoreController(MainControl mc)
         {
-            AddScore();
+            AddScore(mc);
             SortHighScores();
             SaveHighScores();
         }
