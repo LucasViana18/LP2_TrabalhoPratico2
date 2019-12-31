@@ -6,7 +6,7 @@ namespace SnakeGame
     public class Render
     {
         // Visual construction of the game borders
-        public void GameBorder()
+        public void GameBorder(MainControl mc)
         {
             Console.Clear();
 
@@ -19,7 +19,7 @@ namespace SnakeGame
                 Console.SetCursorPosition(1, i);
                 Console.Write("#");
             }
-
+            
             // Right vertical border
             for (int i = 1; i < 41; i++)
             {
@@ -27,6 +27,7 @@ namespace SnakeGame
                 Console.SetCursorPosition(61, i);
                 Console.Write("#");
             }
+            Console.Write("\tScore: " + mc.Score);
 
             // Top horizontal border
             for (int i = 1; i < 61; i++)
@@ -46,17 +47,6 @@ namespace SnakeGame
         }
 
         //Snake
-        //public void StartSnek()
-        //{
-        //    Random rnd = new Random();
-        //    int positionx = rnd.Next(2,60);
-        //    int positiony = rnd.Next(2, 40);
-
-        //    Console.ForegroundColor = ConsoleColor.Yellow;
-        //    Console.SetCursorPosition(positionx, positiony);
-        //    Console.WriteLine("c:");
-        //}
-
         public void RenderSnake(int applesEaten, int[] xPosIn, int[] yPosIn,
             out int[] xPosOut, out int[] yPosOut)
         {
@@ -92,6 +82,13 @@ namespace SnakeGame
 
         public void MainMenu()
         {
+            Console.WriteLine("███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗     ██████╗  █████╗ ███╗   ███╗███████╗");
+            Console.WriteLine("██╔════╝████╗  ██║██╔══██╗██║ ██╔╝██╔════╝    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝");
+            Console.WriteLine("███████╗██╔██╗ ██║███████║█████╔╝ █████╗      ██║  ███╗███████║██╔████╔██║█████╗  ");
+            Console.WriteLine("╚════██║██║╚██╗██║██╔══██║██╔═██╗ ██╔══╝      ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ");
+            Console.WriteLine("███████║██║ ╚████║██║  ██║██║  ██╗███████╗    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗");
+            Console.WriteLine("╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\n");
+
             Console.WriteLine("1. New Game    \n" +
                               "2. High Scores \n" +
                               "3. Quit        \n");
@@ -119,6 +116,13 @@ namespace SnakeGame
             Console.WriteLine("\n\nPress any key to return");
 
             sr.Close();
+        }
+
+        public void RenderApple(int x, int y)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine("0");
         }
     }
 }
