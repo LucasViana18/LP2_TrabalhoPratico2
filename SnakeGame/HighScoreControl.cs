@@ -5,24 +5,23 @@ using System.IO;
 
 namespace SnakeGame
 {
-    class HighScoreControl
+    public class HighScoreControl
     {
         //MainControl mc;
-        string fileName;
-        char separator;
-        List<HighScore> scoreList;
+        private string fileName;
+        private char separator;
+        private List<HighScore> scoreList;
 
         public HighScoreControl()
         {
 
             fileName = $"HighScores.txt";
             separator = '\t';
+            scoreList = new List<HighScore>();
         }
 
         public void CreateHighScores()
         {
-            scoreList = new List<HighScore>();
-
             if (!File.Exists(fileName))
             {
                 using (StreamWriter sw = File.CreateText(fileName))
@@ -51,7 +50,7 @@ namespace SnakeGame
             if (scoreList.Count < 8)
             {
                 Console.Clear();
-                Console.WriteLine("New HighScore! What's your name ?\n");
+                Console.WriteLine("New HighScore! What's your name?\n");
                 name = Console.ReadLine() + "          ";
                 name = name.Substring(0, 10);
 
@@ -82,7 +81,7 @@ namespace SnakeGame
                     name = name.Substring(0, 10);
 
                     Console.WriteLine($"\nYour score of {mc.Score} was " +
-                        "added to HighScores!");
+                        "added to HighScores!\n");
 
                     scoreList.Add(new HighScore(name, mc.Score));
 
@@ -93,7 +92,7 @@ namespace SnakeGame
         public void SortHighScores()
         {
             // Sorts HighScores With The Given Comparer
-            scoreList.Sort();
+            scoreList.Sort(new HighscoreComparer());
 
             //If A Score Was Added, Remove The Lowest Score
             if (scoreList.Count > 8)
@@ -121,4 +120,3 @@ namespace SnakeGame
         }
     }
 }
-

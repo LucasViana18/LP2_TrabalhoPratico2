@@ -49,6 +49,7 @@ namespace SnakeGame
             
             do
             {
+                ResetGame();
                 render.MainMenu();
                 string option = Console.ReadLine();
 
@@ -67,7 +68,7 @@ namespace SnakeGame
                         break;     
                 }
 
-            } while (! programEnded);
+            } while (!programEnded);
         }
 
         // The Game loop method
@@ -143,6 +144,18 @@ namespace SnakeGame
         {
             if (xMove == xApplePos && yMove == yApplePos) return true;
             return false;
+        }
+
+        private void ResetGame()
+        {
+            applesEaten = 0;
+            speed = 250;
+            xMove = new int[50];
+            yMove = new int[50];
+            xMove[0] = 20;
+            yMove[0] = 20;
+            xApplePos = 10;
+            yApplePos = 10;
         }
 
         private void Update()
