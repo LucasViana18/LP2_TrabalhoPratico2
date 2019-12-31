@@ -67,7 +67,6 @@ namespace SnakeGame
                         programEnded = true;
                         break;     
                 }
-
             } while (!programEnded);
         }
 
@@ -85,14 +84,14 @@ namespace SnakeGame
             //double lag = 0;
 
             // Render first the border and the snake
-            render.GameBorder();
+            render.GameBorder(this);
             render.RenderSnake(applesEaten, xMove,yMove, out xMove, out yMove);
 
             // First key press to start
-            ConsoleKey input = Console.ReadKey().Key;
+            ConsoleKey input = Console.ReadKey(true).Key;
 
             SetApplePosition(random, out xApplePos, out yApplePos);
-            RenderApple(xApplePos, yApplePos);
+            render.RenderApple(xApplePos, yApplePos);
 
             // Loop
             do
@@ -107,18 +106,18 @@ namespace SnakeGame
                 // Update the drawing of the snake
                 render.RenderSnake(applesEaten, xMove, yMove, out xMove, out yMove);
 
-                isAppleEaten = AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
+                isAppleEaten = snake.AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
 
                 if (isAppleEaten)
                 {
                     SetApplePosition(random, out xApplePos, out yApplePos);
-                    RenderApple(xApplePos, yApplePos);
+                    render.RenderApple(xApplePos, yApplePos);
                     applesEaten++;
-                    speed *= .9f;
+                    speed *= 0.95f;
                 }
 
                 // Recognize input
-                if (Console.KeyAvailable) input = Console.ReadKey().Key;
+                if (Console.KeyAvailable) input = Console.ReadKey(true).Key;
                 // Slow the update game
                 Thread.Sleep(Convert.ToInt32(speed));
 
@@ -131,19 +130,6 @@ namespace SnakeGame
         {
             x = rand.Next(2, 60);
             y = rand.Next(2, 40);
-        }
-
-        private void RenderApple(int x, int y)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine("0");
-        }
-
-        private bool AppleCheck(int xMove, int yMove, int xApplePos, object y)
-        {
-            if (xMove == xApplePos && yMove == yApplePos) return true;
-            return false;
         }
 
         private void ResetGame()
