@@ -6,7 +6,7 @@ namespace SnakeGame
     public class Render
     {
         // Visual construction of the game borders
-        public void GameBorder(MainControl mc)
+        public void GameBorder()
         {
             Console.Clear();
 
@@ -27,7 +27,6 @@ namespace SnakeGame
                 Console.SetCursorPosition(61, i);
                 Console.Write("#");
             }
-            Console.Write("\tScore: " + mc.Score);
 
             // Top horizontal border
             for (int i = 1; i < 61; i++)
@@ -82,38 +81,38 @@ namespace SnakeGame
 
         public void MainMenu()
         {
-            Console.WriteLine("███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗     ██████╗  █████╗ ███╗   ███╗███████╗");
+            Console.WriteLine(RepeatChar('-', 90));
+            Console.WriteLine("\n███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗     ██████╗  █████╗ ███╗   ███╗███████╗");
             Console.WriteLine("██╔════╝████╗  ██║██╔══██╗██║ ██╔╝██╔════╝    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝");
             Console.WriteLine("███████╗██╔██╗ ██║███████║█████╔╝ █████╗      ██║  ███╗███████║██╔████╔██║█████╗  ");
             Console.WriteLine("╚════██║██║╚██╗██║██╔══██║██╔═██╗ ██╔══╝      ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ");
             Console.WriteLine("███████║██║ ╚████║██║  ██║██║  ██╗███████╗    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗");
             Console.WriteLine("╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\n");
 
-            Console.WriteLine("1. New Game    \n" +
-                              "2. High Scores \n" +
-                              "3. Quit        \n");
+            Console.Write("1. New Game    \n" +
+                          "2. High Scores \n" +
+                          "3. Quit        \n --> ");
+            
         }
 
         public void HighScores()
         {
-
             string fileName = "HighScores.txt";
             char separator = '\t';
 
             StreamReader sr = new StreamReader(fileName);
             string s;
 
-            Console.WriteLine("HighScores\n");
+            Console.WriteLine("\n" + RepeatChar('-', 90));
+            Console.WriteLine("\nHighScores\n");
 
             while ((s = sr.ReadLine()) != null)
             {
                 string[] nameAndScore = s.Split(separator);
                 string name = nameAndScore[0];
                 float score = Convert.ToSingle(nameAndScore[1]);
-                Console.WriteLine($"Player: {name}\tScore: {score,4}");
+                Console.WriteLine($"Player: {name}\tScore: {score,4}\n");
             }
-
-            Console.WriteLine("\n\nPress any key to return");
 
             sr.Close();
         }
@@ -123,6 +122,20 @@ namespace SnakeGame
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("0");
+        }
+
+        public void RenderScore(MainControl mc)
+        {
+            Console.SetCursorPosition(65, 5);
+            Console.Write("Score: " + mc.Score);
+        }
+
+        private string RepeatChar(char character, int number)
+        {
+            string result = "";
+            for (int i = 0; i < number; i++)
+                result += character;
+            return result;
         }
     }
 }
