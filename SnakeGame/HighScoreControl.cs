@@ -54,7 +54,7 @@ namespace SnakeGame
                 name = name.Substring(0, 10);
 
                 Console.WriteLine($"\nYour score was " +
-                    "added to the HighScores!");
+                    "added to the HighScores!\n");
 
                 scoreList.Add(new HighScore(name, mc.Score));
                 SortHighScores();

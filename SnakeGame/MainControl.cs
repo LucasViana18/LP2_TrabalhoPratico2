@@ -79,12 +79,13 @@ namespace SnakeGame
             // Local Variables
             bool gameEnded = false;
             bool hitwall;
+            bool hitItselft;
 
             //double previous = DateTime.Now.Ticks;
             //double lag = 0;
 
             // Render first the border and the snake
-            render.GameBorder(this);
+            render.GameBorder();
             render.RenderSnake(applesEaten, xMove,yMove, out xMove, out yMove);
 
             // First key press to start
@@ -101,11 +102,12 @@ namespace SnakeGame
 
                 // Check if snake hit the wall
                 hitwall = snake.CollideWithWall(xMove[0], yMove[0]);
-                if (hitwall) gameEnded = true;
+                hitItselft = snake.HitBodyCheck(xMove, yMove, applesEaten);
+                if (hitwall || hitItselft) gameEnded = true;
 
                 // Update the drawing of the snake
                 render.RenderSnake(applesEaten, xMove, yMove, out xMove, out yMove);
-
+                
                 isAppleEaten = snake.AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
 
                 if (isAppleEaten)
@@ -114,6 +116,7 @@ namespace SnakeGame
                     render.RenderApple(xApplePos, yApplePos);
                     applesEaten++;
                     speed *= 0.95f;
+                    render.RenderScore(this);
                 }
 
                 // Recognize input

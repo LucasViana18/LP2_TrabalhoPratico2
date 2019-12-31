@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SnakeGame
 {
@@ -32,6 +33,8 @@ namespace SnakeGame
                     Console.Write(" ");
                     xPosIn++;
                     break;
+                default:
+                    break;
             }
 
             xPosOut = xPosIn;
@@ -47,6 +50,16 @@ namespace SnakeGame
         public bool AppleCheck(int xMove, int yMove, int xApplePos, int yApplePos)
         {
             if (xMove == xApplePos && yMove == yApplePos) return true;
+            return false;
+        }
+
+        public bool HitBodyCheck(int[] xPos, int[] yPos, int applesEaten)
+        {
+            for(int i = 1; i < applesEaten + 1; i++)
+            {
+                if (xPos[0] == xPos[i] && yPos[0] == yPos[i])
+                    return true;
+            }
             return false;
         }
     }
