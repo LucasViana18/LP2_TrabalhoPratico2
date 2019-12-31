@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SnakeGame
 {
-    class Render
+    public class Render
     {
         // Visual construction of the game borders
         public void GameBorder()
@@ -94,7 +94,7 @@ namespace SnakeGame
         {
             Console.WriteLine("1. New Game    \n" +
                               "2. High Scores \n" +
-                              "4. Quit        \n");
+                              "3. Quit        \n");
         }
 
         public void HighScores()
