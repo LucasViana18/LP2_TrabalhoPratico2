@@ -20,6 +20,8 @@ namespace SnakeGame
         private int applesEaten;
         private bool isAppleEaten;
         private Random random;
+        private ConsoleKey input;
+        private bool gameEnded;
 
         //private const double MS_PER_UPDATE = 5;
 
@@ -39,6 +41,7 @@ namespace SnakeGame
             yApplePos = 10;
             applesEaten = 0;
             isAppleEaten = false;
+            gameEnded = false;
         }
 
         public void MainMenuControl()
@@ -76,11 +79,6 @@ namespace SnakeGame
             // Turn cursor invisible
             Console.CursorVisible = false;
 
-            // Local Variables
-            bool gameEnded = false;
-            bool hitwall;
-            bool hitItselft;
-
             //double previous = DateTime.Now.Ticks;
             //double lag = 0;
 
@@ -89,7 +87,7 @@ namespace SnakeGame
             render.RenderSnake(applesEaten, xMove,yMove, out xMove, out yMove);
 
             // First key press to start
-            ConsoleKey input = Console.ReadKey(true).Key;
+            input = Console.ReadKey(true).Key;
 
             SetApplePosition(random, out xApplePos, out yApplePos);
             render.RenderApple(xApplePos, yApplePos);
@@ -97,38 +95,23 @@ namespace SnakeGame
             // Loop
             do
             {
-                // Method to define direction for the snake
-                snake.InputMove(input, xMove[0], yMove[0], out xMove[0], out yMove[0]);
+                // Detects user input
+                InputManager();
 
-                // Check if snake hit the wall
-                hitwall = snake.CollideWithWall(xMove[0], yMove[0]);
-                hitItselft = snake.HitBodyCheck(xMove, yMove, applesEaten);
-                if (hitwall || hitItselft) gameEnded = true;
+                // Update the game every frame
+                Update();
 
-                // Update the drawing of the snake
-                render.RenderSnake(applesEaten, xMove, yMove, out xMove, out yMove);
+                // Draw the game for the user
+                RenderGame();
                 
-                isAppleEaten = snake.AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
-
-                if (isAppleEaten)
-                {
-                    SetApplePosition(random, out xApplePos, out yApplePos);
-                    render.RenderApple(xApplePos, yApplePos);
-                    applesEaten++;
-                    speed *= 0.95f;
-                    render.RenderScore(this);
-                }
-
-                // Recognize input
-                if (Console.KeyAvailable) input = Console.ReadKey(true).Key;
-                // Slow the update game
+                // Slow down the game every "speed" miliseconds
                 Thread.Sleep(Convert.ToInt32(speed));
 
             } while (!gameEnded);
             
             hsc.HighScoreController(this);
         }
-
+        
         private void SetApplePosition(Random rand, out int x, out int y)
         {
             x = rand.Next(2, 60);
@@ -147,8 +130,32 @@ namespace SnakeGame
             yApplePos = 10;
         }
 
+        private void InputManager()
+        {
+            snake.InputMove(input, xMove[0], yMove[0], out xMove[0], out yMove[0]);
+            if (Console.KeyAvailable) input = Console.ReadKey(true).Key;
+        }
+
         private void Update()
         {
+            bool hitwall;
+            bool hitItselft;
+
+            hitwall = snake.CollideWithWall(xMove[0], yMove[0]);
+            hitItselft = snake.HitBodyCheck(xMove, yMove, applesEaten);
+            if (hitwall || hitItselft) gameEnded = true;
+
+            isAppleEaten = snake.AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
+
+            if (isAppleEaten)
+            {
+                SetApplePosition(random, out xApplePos, out yApplePos);
+                render.RenderApple(xApplePos, yApplePos);
+                applesEaten++;
+                speed *= 0.95f;
+                render.RenderScore(this);
+            }
+
             //double current = DateTime.Now.Ticks;
             //double elapsed = current - previous;
             //previous = current;
@@ -160,6 +167,11 @@ namespace SnakeGame
             //}
 
             //render.Apple();
+        }
+
+        private void RenderGame()
+        {
+            render.RenderSnake(applesEaten, xMove, yMove, out xMove, out yMove);
         }
     }
 }
