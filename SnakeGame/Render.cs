@@ -53,7 +53,7 @@ namespace SnakeGame
             //Render Head
             Console.SetCursorPosition(xPosIn[0], yPosIn[0]);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("O");
+            Console.WriteLine("Ö");
 
             //Render Body
             for (int i = 1; i < applesEaten + 1; i++)
