@@ -134,8 +134,14 @@ namespace SnakeGame
 
         private void InputManager()
         {
-            snake.InputMove(input, xMove[0], yMove[0], out xMove[0], out yMove[0]);
-            if (Console.KeyAvailable) input = Console.ReadKey(true).Key;
+            ConsoleKey tempKey;
+            if (Console.KeyAvailable)
+            {
+                tempKey = Console.ReadKey(true).Key;
+                while (Console.KeyAvailable) { Console.ReadKey(true); }
+                snake.ValidKeys(tempKey);
+            }
+            snake.InputMove(xMove[0], yMove[0], out xMove[0], out yMove[0]);
         }
 
         private void Update()

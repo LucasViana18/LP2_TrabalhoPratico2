@@ -5,9 +5,25 @@ namespace SnakeGame
 {
     public class Snake
     {
-        public void InputMove(ConsoleKey input, int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
+        private List<ConsoleKey> controlKeys;
+
+        private ConsoleKey lastKey;
+
+        public Snake()
         {
-            switch (input)
+            lastKey = ConsoleKey.UpArrow;
+            controlKeys = new List<ConsoleKey>()
+            {
+                ConsoleKey.W, ConsoleKey.UpArrow,
+                ConsoleKey.S, ConsoleKey.DownArrow,
+                ConsoleKey.A, ConsoleKey.LeftArrow,
+                ConsoleKey.D, ConsoleKey.RightArrow
+            };
+        }
+
+        public void InputMove(int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
+        {
+            switch (lastKey)
             {
                 case ConsoleKey.W:
                 case ConsoleKey.UpArrow:
@@ -33,12 +49,16 @@ namespace SnakeGame
                     Console.Write(" ");
                     xPosIn++;
                     break;
-                default:
-                    break;
             }
 
             xPosOut = xPosIn;
             yPosOut = yPosIn;
+        }
+
+        public void ValidKeys(ConsoleKey keyPressed)
+        {
+            if (controlKeys.Contains(keyPressed))
+                lastKey = keyPressed;
         }
 
         public bool CollideWithWall(int xPos, int yPos)
