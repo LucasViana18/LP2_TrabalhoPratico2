@@ -128,6 +128,8 @@ namespace SnakeGame
             yMove[0] = 20;
             xApplePos = 10;
             yApplePos = 10;
+
+            gameEnded = false;
         }
 
         private void InputManager()
