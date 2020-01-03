@@ -4,21 +4,29 @@ using System.IO;
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// Manages the Highscore of the user
+    /// </summary>
     public class HighScoreControl
     {
-        //MainControl mc;
+        // Instance variables
         private string fileName;
         private char separator;
         private List<HighScore> scoreList;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public HighScoreControl()
         {
-
             fileName = $"HighScores.txt";
             separator = '\t';
             scoreList = new List<HighScore>();
         }
 
+        /// <summary>
+        /// Creates the file HighScores
+        /// </summary>
         public void CreateHighScores()
         {
             if (!File.Exists(fileName))
@@ -42,10 +50,16 @@ namespace SnakeGame
             sr.Close();
         }
 
+        /// <summary>
+        /// Add score to the file and list
+        /// </summary>
+        /// <param name="mc"></param>
         public void AddScore(MainControl mc)
         {
+            // Local variable
             string name;
 
+            // If number of recorded scores is less than 8, saves the new score
             if (scoreList.Count < 8)
             {
                 Console.Clear();
@@ -59,7 +73,7 @@ namespace SnakeGame
                 scoreList.Add(new HighScore(name, mc.Score));
                 SortHighScores();
             }
-
+            // Else remove the lowest score recorded
             else
             {
                 bool isHigher = false;
@@ -88,6 +102,9 @@ namespace SnakeGame
             }
         }
 
+        /// <summary>
+        /// Organize the scores
+        /// </summary>
         public void SortHighScores()
         {
             // Sorts HighScores With The Given Comparer
@@ -100,6 +117,9 @@ namespace SnakeGame
             }
         }
 
+        /// <summary>
+        /// Saves the score
+        /// </summary>
         public void SaveHighScores()
         {
             StreamWriter sw = new StreamWriter(fileName);
@@ -111,6 +131,10 @@ namespace SnakeGame
             sw.Close();
         }
 
+        /// <summary>
+        /// Calls, per order, the Highscore methods
+        /// </summary>
+        /// <param name="mc">MainControl reference</param>
         public void HighScoreController(MainControl mc)
         {
             AddScore(mc);
