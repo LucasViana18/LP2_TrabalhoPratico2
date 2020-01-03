@@ -3,9 +3,14 @@ using System.IO;
 
 namespace SnakeGame
 {
+    /// <summary>
+    /// Manages the display of the game for the user
+    /// </summary>
     public class Render
     {
-        // Visual construction of the game borders
+        /// <summary>
+        /// Draws the game border
+        /// </summary>
         public void GameBorder()
         {
             Console.Clear();
@@ -45,11 +50,17 @@ namespace SnakeGame
             }
         }
 
-        //Snake
+        /// <summary>
+        /// Draws the snake
+        /// </summary>
+        /// <param name="applesEaten">Number of apples eaten</param>
+        /// <param name="xPosIn">Position x with old value</param>
+        /// <param name="yPosIn">Position y with old value</param>
+        /// <param name="xPosOut">Position x with new value</param>
+        /// <param name="yPosOut">Position y with new value</param>
         public void RenderSnake(int applesEaten, int[] xPosIn, int[] yPosIn,
             out int[] xPosOut, out int[] yPosOut)
         {
-
             //Render Head
             Console.SetCursorPosition(xPosIn[0], yPosIn[0]);
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -79,6 +90,9 @@ namespace SnakeGame
             yPosOut = yPosIn;
         }
 
+        /// <summary>
+        /// Displays the main menu
+        /// </summary>
         public void MainMenu()
         {
             Console.WriteLine(RepeatChar('-', 90));
@@ -95,8 +109,12 @@ namespace SnakeGame
             
         }
 
+        /// <summary>
+        /// Displays the Highscores
+        /// </summary>
         public void HighScores()
         {
+            // Local variables
             string fileName = "HighScores.txt";
             char separator = '\t';
 
@@ -117,6 +135,11 @@ namespace SnakeGame
             sr.Close();
         }
 
+        /// <summary>
+        /// Draws the apple
+        /// </summary>
+        /// <param name="x">Position x</param>
+        /// <param name="y">Position y</param>
         public void RenderApple(int x, int y)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -124,12 +147,22 @@ namespace SnakeGame
             Console.WriteLine("0");
         }
 
+        /// <summary>
+        /// Displays the score
+        /// </summary>
+        /// <param name="mc">MainControl reference</param>
         public void RenderScore(MainControl mc)
         {
             Console.SetCursorPosition(65, 5);
             Console.Write("Score: " + mc.Score);
         }
 
+        /// <summary>
+        /// Method that repeats a char in a line
+        /// </summary>
+        /// <param name="character">The char</param>
+        /// <param name="number">Number of chars</param>
+        /// <returns></returns>
         private string RepeatChar(char character, int number)
         {
             string result = "";
