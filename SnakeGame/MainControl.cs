@@ -71,12 +71,13 @@ namespace SnakeGame
                     case "1":
                         GameLoop();
                         break;
-
                     case "2":
                         render.HighScores();
                         break;
-
                     case "3":
+                        render.RenderControls();
+                        break;
+                    case "4":
                         programEnded = true;
                         break;     
                 }
@@ -189,9 +190,11 @@ namespace SnakeGame
             if (hitwall || hitItselft) gameEnded = true;
 
             // Checks if apple was eaten
-            isAppleEaten = snake.AppleCheck(xMove[0], yMove[0], xApplePos, yApplePos);
+            isAppleEaten = snake.AppleCheck
+                (xMove[0], yMove[0], xApplePos, yApplePos);
 
-            // If its eaten spawns a new one, increment the number apples eaten and speed
+            // If its eaten spawns a new one, increment the number apples eaten
+            //and speed
             if (isAppleEaten)
             {
                 SetApplePosition(random, out xApplePos, out yApplePos);
@@ -207,7 +210,8 @@ namespace SnakeGame
         /// </summary>
         private void RenderGame()
         {
-            render.RenderSnake(applesEaten, xMove, yMove, out xMove, out yMove);
+            render.RenderSnake
+                (applesEaten, xMove, yMove, out xMove, out yMove);
         }
     }
 }

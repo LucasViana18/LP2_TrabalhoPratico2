@@ -75,7 +75,8 @@ namespace SnakeGame
             }
 
             //Erase snake last part
-            Console.SetCursorPosition(xPosIn[applesEaten + 1], yPosIn[applesEaten + 1]);
+            Console.SetCursorPosition(xPosIn[applesEaten + 1], 
+                yPosIn[applesEaten + 1]);
             Console.WriteLine(" ");
 
             //Record position of each body part
@@ -96,16 +97,23 @@ namespace SnakeGame
         public void MainMenu()
         {
             Console.WriteLine(RepeatChar('-', 90));
-            Console.WriteLine("\n███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗     ██████╗  █████╗ ███╗   ███╗███████╗");
-            Console.WriteLine("██╔════╝████╗  ██║██╔══██╗██║ ██╔╝██╔════╝    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝");
-            Console.WriteLine("███████╗██╔██╗ ██║███████║█████╔╝ █████╗      ██║  ███╗███████║██╔████╔██║█████╗  ");
-            Console.WriteLine("╚════██║██║╚██╗██║██╔══██║██╔═██╗ ██╔══╝      ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ");
-            Console.WriteLine("███████║██║ ╚████║██║  ██║██║  ██╗███████╗    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗");
-            Console.WriteLine("╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\n");
+            Console.WriteLine("\n███████╗███╗   ██╗ █████╗ ██╗  ██╗███████╗" +
+                "     ██████╗  █████╗ ███╗   ███╗███████╗");
+            Console.WriteLine("██╔════╝████╗  ██║██╔══██╗██║ ██╔╝██╔════╝   " +
+                " ██╔════╝ ██╔══██╗████╗ ████║██╔════╝");
+            Console.WriteLine("███████╗██╔██╗ ██║███████║█████╔╝ █████╗     " +
+                " ██║  ███╗███████║██╔████╔██║█████╗  ");
+            Console.WriteLine("╚════██║██║╚██╗██║██╔══██║██╔═██╗ ██╔══╝     " +
+                " ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ");
+            Console.WriteLine("███████║██║ ╚████║██║  ██║██║  ██╗███████╗   " +
+                " ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗");
+            Console.WriteLine("╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝   " +
+                "  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝\n");
 
             Console.Write("1. New Game    \n" +
                           "2. High Scores \n" +
-                          "3. Quit        \n --> ");
+                          "3. Controls    \n" +
+                          "4. Quit        \n --> ");
             
         }
 
@@ -155,6 +163,17 @@ namespace SnakeGame
         {
             Console.SetCursorPosition(65, 5);
             Console.Write("Score: " + mc.Score);
+        }
+
+        /// <summary>
+        /// Displays the controls
+        /// </summary>
+        public void RenderControls()
+        {
+            Console.WriteLine(RepeatChar('-', 90));
+            Console.WriteLine("CONTROLS:");
+            Console.WriteLine("WASD or Key Arrows for snake movement.\n");
+            Console.WriteLine("That's it! :)");
         }
 
         /// <summary>
