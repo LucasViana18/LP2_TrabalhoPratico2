@@ -34,7 +34,8 @@ namespace SnakeGame
         /// <param name="yPosIn">Last y Position</param>
         /// <param name="xPosOut">New x Position</param>
         /// <param name="yPosOut">New y Position</param>
-        public void InputMove(int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
+        public void InputMove
+            (int xPosIn, int yPosIn, out int xPosOut, out int yPosOut)
         {
             switch (lastKey)
             {
@@ -86,7 +87,8 @@ namespace SnakeGame
         /// <returns>True if collided</returns>
         public bool CollideWithWall(int xPos, int yPos)
         {
-            if (xPos == 1 || xPos == 61 || yPos == 1 || yPos == 41) return true;
+            if (xPos == 1 || xPos == 61 || yPos == 1 || yPos == 41) 
+                return true;
             return false;
         }
 
@@ -98,7 +100,8 @@ namespace SnakeGame
         /// <param name="xApplePos">Apple x position</param>
         /// <param name="yApplePos">Apple y position</param>
         /// <returns>True if they have the same position</returns>
-        public bool AppleCheck(int xMove, int yMove, int xApplePos, int yApplePos)
+        public bool AppleCheck
+            (int xMove, int yMove, int xApplePos, int yApplePos)
         {
             if (xMove == xApplePos && yMove == yApplePos) return true;
             return false;
