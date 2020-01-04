@@ -59,10 +59,10 @@ namespace SnakeGame
             // Local variable
             string name;
 
+            Console.Clear();
             // If number of recorded scores is less than 8, saves the new score
             if (scoreList.Count < 8)
             {
-                Console.Clear();
                 Console.WriteLine("New HighScore! What's your name?\n");
                 name = Console.ReadLine() + "          ";
                 name = name.Substring(0, 10);
@@ -87,7 +87,6 @@ namespace SnakeGame
 
                 if (isHigher)
                 {
-                    Console.Clear();
                     Console.WriteLine(
                         "New HighScore! What should we call you?\n");
                     name = Console.ReadLine() + "          ";
@@ -98,8 +97,15 @@ namespace SnakeGame
 
                     scoreList.Add(new HighScore(name, mc.Score));
 
+                } else
+                {
+                    Console.WriteLine($"\nYour score was {mc.Score}. \n");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey(true);
+                    Console.Clear();
                 }
             }
+            
         }
 
         /// <summary>

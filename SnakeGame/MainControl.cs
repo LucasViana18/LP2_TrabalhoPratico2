@@ -10,10 +10,10 @@ namespace SnakeGame
     {
         // Instance variables
         private Render render;
-        private Snake snake;
+        private static Snake snake;
         private HighScoreControl hsc;
-        private int[] xMove;
-        private int[] yMove;
+        private static int[] xMove;
+        private static int[] yMove;
         private float speed;
         private bool gameEnded;
         private ConsoleKey input;
@@ -23,6 +23,7 @@ namespace SnakeGame
         private int yApplePos;
         private int applesEaten;
         private bool isAppleEaten;
+        private static bool inputThreadAlive;
 
         // Properties
         public int Score { get { return applesEaten * 10; } }
@@ -46,6 +47,10 @@ namespace SnakeGame
             applesEaten = 0;
             isAppleEaten = false;
             gameEnded = false;
+            inputThreadAlive = false;
+
+
+
         }
 
         /// <summary>
@@ -89,6 +94,9 @@ namespace SnakeGame
         /// </summary>
         public void GameLoop()
         {
+            // Input thread instance
+            Thread trInput = new Thread(InputManager);
+
             // Turn cursor invisible
             Console.CursorVisible = false;
 
@@ -103,11 +111,16 @@ namespace SnakeGame
             SetApplePosition(random, out xApplePos, out yApplePos);
             render.RenderApple(xApplePos, yApplePos);
 
+            // Name and start the input thread
+            trInput.Name = "Input Threading";
+            inputThreadAlive = true;
+            trInput.Start();
+
             // Game Loop
             do
             {
                 // Detects user input
-                InputManager();
+                snake.InputMove(xMove[0], yMove[0], out xMove[0], out yMove[0]);
 
                 // Update the game every frame
                 Update();
@@ -119,6 +132,10 @@ namespace SnakeGame
                 Thread.Sleep(Convert.ToInt32(speed));
 
             } while (!gameEnded);
+
+            // Ensure to kill the thread
+            inputThreadAlive = false;
+            while (trInput.IsAlive);
 
             // Records the new score of the current user after losing the game
             hsc.HighScoreController(this);
@@ -156,23 +173,24 @@ namespace SnakeGame
         /// <summary>
         /// Manages the user input inside the game loop
         /// </summary>
-        private void InputManager()
+        private static void InputManager()
         {
             // Local variable
             ConsoleKey tempKey;
 
-            // if a key is detected
-            if (Console.KeyAvailable)
+            do
             {
-                // Store in the variable the certain key
-                tempKey = Console.ReadKey(true).Key;
-                // This clears the input buffer
-                while (Console.KeyAvailable) { Console.ReadKey(true); }
-                // Checks if the certain key corresponds to the valid keys
-                snake.ValidKeys(tempKey);
-            }
-            // Calls the movement required corresponding the input
-            snake.InputMove(xMove[0], yMove[0], out xMove[0], out yMove[0]);
+                // if a key is detected
+                if (Console.KeyAvailable)
+                {
+                    // Store in the variable the certain key
+                    tempKey = Console.ReadKey(true).Key;
+                    // This clears the input buffer
+                    while (Console.KeyAvailable) { Console.ReadKey(true); }
+                    // Checks if the certain key corresponds to the valid keys
+                    snake.ValidKeys(tempKey);
+                }
+            } while (inputThreadAlive);
         }
 
         /// <summary>
