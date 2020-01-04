@@ -122,6 +122,7 @@ namespace SnakeGame
         /// </summary>
         public void HighScores()
         {
+            Console.Clear();
             // Local variables
             string fileName = "HighScores.txt";
             char separator = '\t';
@@ -170,6 +171,7 @@ namespace SnakeGame
         /// </summary>
         public void RenderControls()
         {
+            Console.Clear();
             Console.WriteLine(RepeatChar('-', 90));
             Console.WriteLine("CONTROLS:");
             Console.WriteLine("WASD or Key Arrows for snake movement.\n");
