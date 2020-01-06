@@ -341,3 +341,6 @@ healthchecksdb
 
 # File of Highscores
 HighScores.txt
+
+# DoxyGen
+Doxygen/
